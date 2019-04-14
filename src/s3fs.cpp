@@ -4710,7 +4710,7 @@ static int my_fuse_opt_proc(void* data, const char* arg, int key, struct fuse_ar
       is_ibm_iam_auth = true;
       return 0;
     }
-    if (0 == strcmp(arg, "use_session_token")) {
+    if (0 == STR2NCMP(arg, "use_session_token")) {
       S3fsCurl::SetIsUseSessionToken(true);
       is_use_session_token = true;
     }

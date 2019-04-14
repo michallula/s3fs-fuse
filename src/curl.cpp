@@ -1197,7 +1197,10 @@ bool S3fsCurl::SetAccessKey(const char* AccessKeyId, const char* SecretAccessKey
 
 bool S3fsCurl::SetAccessKeyWithSessionToken(const char* AccessKeyId, const char* SecretAccessKey, const char* SessionToken)
 {
-  if((!S3fsCurl::is_ibm_iam_auth && (!AccessKeyId || '\0' == AccessKeyId[0])) || !SecretAccessKey || '\0' == SecretAccessKey[0] || !SessionToken || '\0' == SessionToken[0]){
+  bool access_key_is_empty = !AccessKeyId || '\0' == AccessKeyId[0]);
+  bool secret_access_key_is_empty = !SecretAccessKey || '\0' == SecretAccessKey[0];
+  bool session_token_is_empty = !SessionToken || '\0' == SessionToken[0];
+  if((!S3fsCurl::is_ibm_iam_auth && access_key_is_empty) || secret_access_key_is_empty || session_token_is_empty){
     return false;
   }
   AWSAccessKeyId     = AccessKeyId;
